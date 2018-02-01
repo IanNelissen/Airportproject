@@ -1,9 +1,19 @@
+package com.capgemini.setrack.ian.model;
+
+import javax.persistence.*;
+
+@Entity
 public class Airplane {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
     private String type;
     private int maxPassengers;
     private int maxFuel;
+
+    public Airplane(){}
 
     public Airplane(String type, int maxPassengers, int maxFuel) {
         this.type = type;
