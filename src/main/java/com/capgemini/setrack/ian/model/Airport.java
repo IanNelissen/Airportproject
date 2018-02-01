@@ -1,6 +1,9 @@
 package com.capgemini.setrack.ian.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Airport {
@@ -9,8 +12,16 @@ public class Airport {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
+    @NotNull(message="Needs a name")
+    @Size(min=3, max=15, message="A name must be between 3 and 15 characters long!")
     private String name;
+
+    @NotNull(message="Add number of airplanes stationed at airport.")
+    @Max(3)
     private int maxAirplanes;
+
+    @NotNull(message="A number of runways must be selected")
+    @Max(value=10, message="Maximum of 10 runway tracks")
     private int numberRunway;
 
 
