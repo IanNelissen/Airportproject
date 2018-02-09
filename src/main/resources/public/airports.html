@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Airports</title>
+
+    <!-- JQuery -->
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Bootbox -->
+    <script src="/js/libraries/bootbox.min.js"></script>
+
+    <!-- Underscore -->
+    <script src="/js/libraries/underscore-min.js"></script>
+
+    <!--Helpers-->
+    <script src="/js/dataTables.js"></script>
+    <script src="/css/modal.css"></script>
+    <script src="/js/ajax.js"></script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="index.html">Airplane tracker</a>
+            <a class="navbar-brand" href="airplanes.html">Airplanes</a>
+            <a class="navbar-brand" href="#">Airports</a>
+            <a class="navbar-brand" href="#">Fly!</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class=“row”>
+        <div class=“col”>
+
+            <table id="airportTable" class="table table-bordered">
+                <thead>
+                <tr>
+                    <td scope="col">Airport name</td>
+                    <td scope="col">Maximum number of airplanes</td>
+                    <td scope="col">number of runways</td>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <!-- Button trigger modal -->
+        <button class="btn btn-primary btn-md" data-target="#airportModal" id="create">
+            New Airport
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="airportModal" tabindex="-1" role="dialog"
+             aria-labelledby="airportModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close"
+                                data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Create Airport </h4>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+
+                        <form class="form-horizontal" id="airportForm" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="airportName">Airport name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control"
+                                           id="airportName" placeholder="Airport name" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="maxNumberAirplanes">Max number of airplanes</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control"
+                                           id="maxNumberAirplanes" placeholder="Max number of airplanes" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"
+                                       for="numberRunways">Number of runways</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control"
+                                           id="numberRunways" placeholder="Number of runways" required/>
+                                </div>
+                            </div>
+                            <input type="submit" id="airportSubmit" style="display: none;">
+                        </form>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="$('#airportSubmit').click();">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
