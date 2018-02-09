@@ -52,8 +52,8 @@ public class AirplaneControllerTest {
     public void getAllAirplanes() throws Exception {
         List<Airplane> airplanes = new ArrayList<Airplane>();
 
-        Airplane airplane1 = new Airplane("Boeing", 250, 5);
-        Airplane airplane2 = new Airplane("Cesna", 5, 2);
+        Airplane airplane1 = new Airplane("Boeing", 250, 5, 2);
+        Airplane airplane2 = new Airplane("Cesna", 5, 5,2);
 
         airplanes.add(airplane1);
         airplanes.add(airplane2);
@@ -68,7 +68,7 @@ public class AirplaneControllerTest {
     @Test
     public void testCreateAirplane() throws Exception {
 
-        Airplane airplane1 = new Airplane("Learjet", 120, 4);
+        Airplane airplane1 = new Airplane("Learjet", 120, 5, 2);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(airplane1);
 
@@ -79,9 +79,10 @@ public class AirplaneControllerTest {
                 .content(json))
                 .andDo(print())
                 .andExpect(jsonPath("$.id", is((int) airplane1.getId())))
-                .andExpect(jsonPath("$.type", is(airplane1.getType())))
+                .andExpect(jsonPath("$.type", is(airplane1.getAirplaneType())))
                 .andExpect(jsonPath("$.numberPassengers", is(airplane1.getNumberPassengers())))
                 .andExpect(jsonPath("$.maxFuel", is(airplane1.getMaxFuel())))
+                .andExpect(jsonPath("$.fuelLeft", is(airplane1.getFuelLeft())))
                 .andExpect(status().isOk());
 
         Mockito.verify(airplaneRepository, times(1)).save(Mockito.any(Airplane.class));

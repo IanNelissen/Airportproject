@@ -17,7 +17,7 @@ public class Airport {
     private String name;
 
     @NotNull(message="Add number of airplanes stationed at airport.")
-    @Size(min=1, max=3, message="No more then 3 planes are allowed on  airport")
+    @Max(value=3, message="No more then 3 planes are allowed on  airport")
     private int maxAirplanes;
 
     @NotNull(message="A number of runways must be selected")

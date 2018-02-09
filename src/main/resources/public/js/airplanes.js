@@ -1,5 +1,6 @@
 var tableHelper;
 var tableElement;
+var selectedId;
 var edit = false;
 
 $(document).ready(function () {
@@ -9,11 +10,10 @@ $(document).ready(function () {
         bLengthChange: false,
         rowId: 'id',
         columns: [
-            {"data": "type"},
-            {"data": "passengers"},
-            {"data": "fuelLeft"},
-            {"data": "fromAirport"},
-            {"data": "toAirport"}
+            {"data": "airplaneType"},
+            {"data": "numberPassengers"},
+            {"data": "maxFuel"},
+            {"data": "fuelLeft"}
         ]
     });
 
@@ -65,7 +65,6 @@ function handleCreateFormSubmit() {
     createAirplanes(data, function(result) {
         $('#airplaneForm').get(0).reset();
         updateTable();
-        setAirplaneOptions();
         $('#airplaneModal').modal('hide');
     }, handleError);
 }
@@ -91,42 +90,42 @@ function getAirplanes(successCallback, errorCallback) {
     ajaxJsonCall('GET', '/api/airplanes/', null, successCallback, errorCallback);
 }
 
-function createAirplanes(room, successCallback, errorCallback) {
-    ajaxJsonCall('POST', '/api/rooms/create', room, successCallback, errorCallback);
+function createAirplanes(airplane, successCallback, errorCallback) {
+    console.log("error error");
+    console.log(airplane);
+    ajaxJsonCall('POST', '/api/airplanes/create', airplane, successCallback, errorCallback);
 }
 
-function editAirplane(room, successCallback, errorCallback) {
-    ajaxJsonCall('POST', '/api/airplanes/edit', room, successCallback, errorCallback);
+function editAirplane(airplane, successCallback, errorCallback) {
+    ajaxJsonCall('POST', '/api/airplanes/edit', airplane, successCallback, errorCallback);
     console.log(airplane.id);
 }
 
-function removeAirplane(airport, successCallback, errorCallback) {
-    ajaxJsonCall('DELETE', '/api/airports/delete/' + airport.id, null, successCallback, errorCallback);
+function removeAirplane(airplane, successCallback, errorCallback) {
+    ajaxJsonCall('DELETE', '/api/airplanes/delete/' + airplane.id, null, successCallback, errorCallback);
 }
 
 function getFormData() {
     return {
-        type: $("#airplaneType").val(),
-        passengers: $("#numberPassengers").val(),
-        fuelLeft: $("#fuel").val(),
-        fromAirport: $("#fromAirport").val(),
-        toAirport: $("#toAirport").val()
+        airplaneType: $("#airplaneType").val(),
+        numberPassengers: $("#numberPassengers").val(),
+        maxFuel: $("#maxFuel").val(),
+        fuelLeft: $("#fuelLeft").val(),
     };
 }
 
 function setFormData(airplane) {
     console.log(airplane);
     $('#airplaneType').val(airplane.type);
-    $('#numberPassengers').val(airplane.passengers);
-    $('#fuel').val(airplane.fuelLeft);
-    $('#fromAirport').val(airplane.fromAirport);
-    $('#toAirport').val(airplane.toAirport);
+    $('#numberPassengers').val(airplane.numberPassengers);
+    $('#maxFuel').val (airplane.maxFuel),
+    $('#fuelLeft').val(airplane.fuelLeft);
 }
 
 function updateTable() {
     $('button.controls').prop('disabled', selectedId === undefined);
-    ajaxJsonCall('GET', '/api/airplanes/', null, function(rooms) {
+    ajaxJsonCall('GET', '/api/airplanes/', null, function(airplanes) {
         tableHelper.dataTable.clear();
-        tableHelper.dataTable.rows.add(rooms);
+        tableHelper.dataTable.rows.add(airplanes);
         tableHelper.dataTable.columns.adjust().draw();
     }, null)}

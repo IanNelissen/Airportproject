@@ -11,13 +11,13 @@ public class AirportController {
     @Autowired
     private AirportRepository airportRepository;
 
-    //get all Airpors
+    //get all Airports
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Airport> getAllAirports(){
         return this.airportRepository.findAll();
     }
 
-    //create airport
+    //create Airport
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public Airport createAirPort(@RequestBody Airport airport){
         this.airportRepository.save(airport);
