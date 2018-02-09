@@ -7,12 +7,18 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <!-- Toastr -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <!-- DataTables -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
+
+    <!-- Bootbox -->
+    <script src="/js/libraries/bootbox.min.js"></script>
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -29,6 +35,8 @@
     <!--Helpers-->
     <script src="/js/dataTables.js"></script>
     <script src="/css/modal.css"></script>
+    <script src="/js/airplanes.js"></script>
+    <script src="/js/ajax.js"></script>
 
 </head>
 
@@ -44,27 +52,27 @@
 <div class="container mt-5">
     <div class=“row”>
         <div class=“col”>
-            <table id="table_id" class="table table-bordered">
+            <table id="airplaneTable" class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Airplane ID</th>
-                    <th>Airplane Type</th>
-                    <th>Number of Passengers</th>
-                    <th>Fuel left</th>
-                    <th>From Airport</th>
-                    <th>To Airport</th>
+                    <td scope="col">Airplane ID</td>
+                    <td scope="col">Airplane Type</td>
+                    <td scope="col">Number of Passengers</td>
+                    <td scope="col">Fuel left</td>
+                    <td scope="col">From Airport</td>
+                    <td scope="col">To Airport</td>
                 </tr>
                 </thead>
             </table>
         </div>
         <!-- Button trigger modal -->
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalHorizontal">
+        <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#airplaneModal">
             New Airplane
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="airplaneModal" tabindex="-1" role="dialog"
+             aria-labelledby="airplaneModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Modal Header -->
@@ -81,7 +89,7 @@
                     <!-- Modal Body -->
                     <div class="modal-body">
 
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" id="airplaneForm" role="form">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"
                                        for="airplaneType">Airplane type</label>
@@ -132,9 +140,7 @@
                                 data-dismiss="modal">
                             Close
                         </button>
-                        <button type="button" class="btn btn-primary">
-                            Create
-                        </button>
+                        <button type="button" class="btn btn-primary" onclick="$('#create').click();">Submit</button>
                     </div>
                 </div>
             </div>
